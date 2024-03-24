@@ -62,13 +62,23 @@ const getContent = async (req, res) => {
   }
 };
 const deleteContent = async (req, res) => {
-  const id = req.params;
+  const id = req.params.id;
   try {
     const data = await ContactFormModel.findByIdAndDelete(id);
-    return res.status(200);
+    return res.status(200).json({ msg: "Deleted Successfully!" });
   } catch (error) {
     console.log(error);
   }
+};
+const acceptPyment = async (req, res) => {
+  const id = req.params.id;
+  const current = await PaymentsForm.findByIdAndUpdate(id, { status: true });
+  return res.status(200).json({ msg: "Done" });
+};
+const rejPyment = async (req, res) => {
+  const id = req.params.id;
+  const current = await PaymentsForm.findByIdAndUpdate(id, { status: false });
+  return res.status(200).json({ msg: "Done" });
 };
 module.exports = {
   addPayment,
@@ -79,4 +89,6 @@ module.exports = {
   deletePayment,
   getContent,
   deleteContent,
+  acceptPyment,
+  rejPyment,
 };

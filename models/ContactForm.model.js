@@ -13,7 +13,13 @@ const ContactFormSchema = new mongoose.Schema(
     message: {
       type: String,
     },
-    whatAmmiter: {
+    interested: {
+      type: String,
+    },
+    placeType: {
+      type: String,
+    },
+    country: {
       type: String,
     },
   },

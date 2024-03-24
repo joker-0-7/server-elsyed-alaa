@@ -27,7 +27,10 @@ mongoose
 
 app.use("/", indexRouter);
 app.use("/forms", usersRouter);
-
+app.use(
+  "/public/images",
+  express.static(path.join(__dirname, "public/images"))
+);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

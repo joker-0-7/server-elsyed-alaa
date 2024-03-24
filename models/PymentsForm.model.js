@@ -31,6 +31,19 @@ const PaymentFormSchema = new mongoose.Schema(
     accountName: {
       type: String,
     },
+    image: {
+      type: String,
+    },
+    price: {
+      type: Number,
+    },
+    productName: {
+      type: String,
+    },
+    status: {
+      type: Boolean,
+      default: null,
+    },
   },
   { timestamps: true }
 );
