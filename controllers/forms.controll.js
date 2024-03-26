@@ -1,7 +1,13 @@
 const ContactFormModel = require("../models/ContactForm.model");
+const ProductsModel = require("../models/Products.model");
 const PaymentsForm = require("../models/PymentsForm.model");
 const addPayment = async (req, res) => {
   const data = req.body;
+  const image = req.uniqueSuffix;
+  data.image = image;
+  console.log(data);
+  console.log(req.file);
+  console.log(req.files);
   try {
     let newData = await PaymentsForm.create(data);
     return res.status(201).json({ msg: "Done" });
@@ -72,6 +78,16 @@ const deleteContent = async (req, res) => {
 };
 const acceptPyment = async (req, res) => {
   const id = req.params.id;
+  const name = req.body.productName;
+  const product = await ProductsModel.findOne({ name: name });
+  if (product) {
+    const updateCount = product.count - 1;
+    const updateProduct = await ProductsModel.findOneAndUpdate(
+      { name: req.body.productName },
+      { count: updateCount }
+    );
+    const newData = product.count;
+  }
   const current = await PaymentsForm.findByIdAndUpdate(id, { status: true });
   return res.status(200).json({ msg: "Done" });
 };

@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose
-  .connect("mongodb://localhost:27017/elsyed-alaa")
+  .connect("mongodb+srv://alsayedalaa632:aj40mgsmKpfLyOwc@cluster0.q0g5o0e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log("Done Connection");
   })

@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const mimetype = file.mimetype.split("/")[1];
-    const uniqueSuffix = `product-${Date.now()}.${mimetype}`;
+    const uniqueSuffix = `order-${Date.now()}.${mimetype}`;
     req.uniqueSuffix = uniqueSuffix;
     cb(null, uniqueSuffix);
   },
