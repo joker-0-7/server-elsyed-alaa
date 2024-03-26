@@ -5,10 +5,9 @@ const addPayment = async (req, res) => {
   const data = req.body;
   const image = req.uniqueSuffix;
   data.image = image;
-  console.log(data);
-  console.log(req.file);
-  console.log(req.files);
   try {
+    if (data.name == "" && data.email == "" && data.phone == "")
+      return res.status(404).json({ msg: "لم يتم ارسال البيانات" });
     let newData = await PaymentsForm.create(data);
     return res.status(201).json({ msg: "Done" });
   } catch (err) {
@@ -80,7 +79,7 @@ const acceptPyment = async (req, res) => {
   const id = req.params.id;
   const name = req.body.productName;
   const product = await ProductsModel.findOne({ name: name });
-  if (product) {
+  if (product && product.count > 0) {
     const updateCount = product.count - 1;
     const updateProduct = await ProductsModel.findOneAndUpdate(
       { name: req.body.productName },
